@@ -17,3 +17,30 @@ function TorusPrimitive(scene, id, innerRadius, outerRadius, slices, loops)
 
 TorusPrimitive.prototype = Object.call(CGFobject.prototype);
 TorusPrimitive.prototype.constructor = TorusPrimitive;
+
+TorusPrimitive.initBuffers = function ()
+{
+    this.vertices = [];
+    this.normals = [];
+    this.texCoords = [];
+    this.indices = [];
+
+    for(var lat = 0; lat <= this.slices; lat++)
+    {
+        var theta = lat * Math.PI / this.stacks; //Angle formed at the current latitude (from bottom to top)
+
+        for (var long = 0; long <= this.loops; long++)
+        {
+            var phi = long * 2 * Math.PI / this.slices; //Angle formed at the current longitude (from left to right)
+
+            var thetaSin = Math.sin(theta);
+            var phiSin = Math.sin(phi);
+            var thetaCos = Math.cos(theta);
+            var phiCos = Math.cos(phi);
+
+            
+        }
+    }
+
+    this.initGLBuffers()
+}

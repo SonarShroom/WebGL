@@ -56,12 +56,14 @@ SpherePrimitive.prototype.initBuffers = function()
          * to set the indices.
          */
         for (var lat = 0; lat < this.stacks; lat++) {
+
             for (var long = 0; long < this.slices; long++) {
                 var first = (lat * (this.slices + 1)) + long;
                 var second = first + this.slices + 1;
                 this.indices.push(first, second, first + 1);
                 this.indices.push(second, second + 1, first + 1);
             }
+
         }
 
         this.initGLBuffers();
