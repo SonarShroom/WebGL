@@ -48,3 +48,6 @@ Temporary Items
 
 #Mongoose
 mongoose-free-6.5.exe
+
+#Webstorm folders
+.idea/

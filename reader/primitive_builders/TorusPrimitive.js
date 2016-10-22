@@ -24,10 +24,12 @@ TorusPrimitive.initBuffers = function ()
     this.normals = [];
     this.texCoords = [];
     this.indices = [];
+    this.primitiveType = this.scene.gl.TRIANGLES;
+    var radius = (this.outerRadius - this.innerRadius) / 2;
 
     for(var lat = 0; lat <= this.slices; lat++)
     {
-        var theta = lat * Math.PI / this.stacks; //Angle formed at the current latitude (from bottom to top)
+        var theta = lat * Math.PI / this.slices; //Angle formed at the current latitude (from bottom to top)
 
         for (var long = 0; long <= this.loops; long++)
         {
@@ -39,14 +41,31 @@ TorusPrimitive.initBuffers = function ()
             var thetaCos = Math.cos(theta);
             var phiCos = Math.cos(phi);
 
+            //Torus equations
             var x = (1 + radius * phiCos) * thetaCos;
             var y = (1 + radius * phiCos) * thetaSin;
             var z = radius * phiSin;
-            var u = 1 - (longNumber / this.loops);
-            var v = 1 - (latNumber / this.slices);
+            //Torus equations for the texture coordinates.
+            var u = 1 - (long / this.loops);
+            var v = 1 - (lat / this.slices);
 
+            this.normals.push(x, y, z);
+            this.texCoords.push(u, v);
+            this.vertices.push(x * this.innerRadius, y * this.innerRadius, z * this.innerRadius);
+        }
+    }
 
-
+    //Set indices for the vertices for each triangle
+    for (var latNumber = 0; latNumber < this.slices; latNumber++) {
+        for (var longNumber = 0; longNumber < this.loops; longNumber++) {
+            var first = (latNumber * (this.loops + 1)) + longNumber;
+            var second = first + this.loops + 1;
+            this.indices.push(first);
+            this.indices.push(second);
+            this.indices.push(first + 1);
+            this.indices.push(second);
+            this.indices.push(second + 1);
+            this.indices.push(first + 1);
         }
     }
 
