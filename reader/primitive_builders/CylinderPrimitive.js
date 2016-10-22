@@ -21,7 +21,41 @@ CylinderPrimitive.prototype.constructor = CylinderPrimitive;
 
 CylinderPrimitive.initBuffers = function()
 {
-    //TODO: Add cylinder building logic.
+    this.primitiveType = this.scene.gl.TRIANGLES;
 
-    this.initBuffers();
+    this.vertices = [];
+    this.indices = [];
+    this.normals = [];
+    this.texCoords = [];
+
+    var transition = (this.base - this.top) / this.stacks;
+
+    for (var lat = 0; lat <= this.stacks; lat++) {
+        var theta = lat * (Math.PI / 2) / this.stacks;
+        var radius = top + transition * lat;
+
+        for (var long = 0; long <= this.slices; long++) {
+            var phi = long * 2 * Math.PI / this.slices;
+
+            var x = Math.cos(phi);
+            var y = Math.sin(phi);
+            var z = Math.cos(theta);
+
+            //Keep the normal vectors normalized.
+            this.normals.push(x, y, z);
+            this.vertices.push(radius * x, radius * y, this.height * z);
+            this.texCoords.push(lat / this.stacks, long / this.slices);
+        }
+    }
+
+    for (var lat = 0; lat < this.stacks; lat++) {
+        for (var long = 0; long < this.slices; long++) {
+            var first = (lat * (this.slices + 1)) + long;
+            var second = first + this.slices + 1;
+            this.indices.push(first, second, first + 1);
+            this.indices.push(second, second + 1, first + 1);
+        }
+    }
+
+    this.initGLBuffers();
 }

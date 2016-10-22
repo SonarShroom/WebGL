@@ -44,6 +44,36 @@ MySceneGraph.prototype.parseDocument = function(rootElement)
 
 }
 
+MySceneGraph.prototype.parseTriangles = function(rootElement)
+{
+
+}
+
+MySceneGraph.prototype.parseRectangles = function(rootElement)
+{
+
+}
+
+MySceneGraph.prototype.parseSpheres = function(rootElement)
+{
+
+}
+
+MySceneGraph.prototype.parseTorus = function(rootElement)
+{
+
+}
+
+MySceneGraph.prototype.parseCylinders = function(rootElement)
+{
+
+}
+
+MySceneGraph.prototype.parseComponents = function(rootElement)
+{
+
+}
+
 /*
  * Example of method that parses elements of one block and stores information in a specific data structure
  */
