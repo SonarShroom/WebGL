@@ -39,7 +39,7 @@ MySceneGraph.prototype.onXMLReady=function()
 	this.scene.onGraphLoaded();
 };
 
-MySceneGraph.prototype.parseDocument(rootElement)
+MySceneGraph.prototype.parseDocument = function(rootElement)
 {
 
 }
@@ -47,7 +47,7 @@ MySceneGraph.prototype.parseDocument(rootElement)
 /*
  * Example of method that parses elements of one block and stores information in a specific data structure
  */
-MySceneGraph.prototype.parseGlobalsExample= function(rootElement) {
+MySceneGraph.prototype.parseGlobalsExample = function(rootElement) {
 	
 	var elems =  rootElement.getElementsByTagName('globals');
 	if (elems == null) {

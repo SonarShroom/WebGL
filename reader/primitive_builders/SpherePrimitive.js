@@ -2,9 +2,8 @@
  * Created by Soner on 18-10-2016.
  */
 
-function SpherePrimitive(scene, id, radius, slices, stacks)
+function SpherePrimitive(scene, radius, slices, stacks)
 {
-    this.id = id;
     this.radius = radius;
     this.slices = slices;
     this.stacks = stacks;
@@ -38,13 +37,22 @@ SpherePrimitive.prototype.initBuffers = function()
             var phi = long * 2 * Math.PI / this.slices; //Angle formed at the current longitude (from left to right)
 
             /**
+             * Calculated sines and cosines of theta and
+             * phi to make this more efficient.
+             */
+            var thetaSin = Math.sin(theta);
+            var phiSin = Math.sin(phi);
+            var thetaCos = Math.cos(theta);
+            var phiCos = Math.cos(phi);
+
+            /**
              * We calculate x y and z first without taking the radius into account
              * to save on processing power. This is because the normalized normal
              * is always equal to the vector without being multiplied by the radius.
              */
-            var x = Math.cos(phi) * Math.sin(theta);
-            var y = Math.sin(phi) * Math.sin(theta);
-            var z = Math.cos(theta);
+            var x = phiCos * thetaSin;
+            var y = phiSin * thetaSin;
+            var z = thetaCos;
 
             this.vertices.push(this.radius * x, this.radius * y, this.radius * z);
             this.normals.push(x, y, z);

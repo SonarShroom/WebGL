@@ -35,7 +35,10 @@ TorusPrimitive.initBuffers = function ()
         {
             var phi = long * 2 * Math.PI / this.slices; //Angle formed at the current longitude (from left to right)
 
-            //Calculated sines and cosines of theta and phi to make this more efficient
+            /**
+             * Calculated sines and cosines of theta and
+             * phi to make this more efficient.
+             */
             var thetaSin = Math.sin(theta);
             var phiSin = Math.sin(phi);
             var thetaCos = Math.cos(theta);

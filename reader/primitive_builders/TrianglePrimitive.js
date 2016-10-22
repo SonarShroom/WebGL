@@ -2,10 +2,9 @@
  * Created by Soner on 20-10-2016.
  */
 
-function TrianglePrimitive(scene, id, x1, x2, x3, y1, y2, y3, z1, z2, z3)
+function TrianglePrimitive(scene, x1, x2, x3, y1, y2, y3, z1, z2, z3)
 {
     this.scene = scene;
-    this.id = id;
 
     this.x1 = x1;
     this.x2 = x2;
@@ -52,6 +51,20 @@ TrianglePrimitive.prototype.initBuffers = function()
                     xNorm, yNorm, zNorm];
 
     this.indices = [0, 1, 2];
+
+    //Calculations to support the single triangle texture coordinates.
+    var a = Math.sqrt((this.x1 - this.x3) * (this.x1 - this.x3) + (this.y1 - this.y3) * (this.y1 - this.y3) + (this.z1 - this.z3) * (this.z1 - this.z3));
+    var b = Math.sqrt((this.x2 - this.x1) * (this.x2 - this.x1) + (this.y2 - this.y1) * (this.y2 - this.y1) + (this.z2 - this.z1) * (this.z2 - this.z1));
+    var c = Math.sqrt((this.x3 - this.x2) * (this.x3 - this.x2) + (this.y3 - this.y2) * (this.y3 - this.y2) + (this.z3 - this.z2) * (this.z3 - this.z2));
+
+    var B = (a * a - b * b + c * c) / (2 * a * c);
+
+    var sinB = Math.sqrt(((a * a) - (a * a) * (B * B)) / (a * a));
+
+
+    this.texCoords = [0, 0,
+                      c, 0,
+                      c - a * B, a * sinB];
 
     this.initGLBuffers();
 };
