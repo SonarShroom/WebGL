@@ -2,9 +2,13 @@
  * Created by Soner on 18-10-2016.
  */
 
-function SpherePrimitive(scene, radius, slices, stacks)
+function SpherePrimitive(scene, id, radius, slices, stacks)
 {
+    this.scene = scene;
+    this.id = id;
+
     this.radius = radius;
+
     this.slices = slices;
     this.stacks = stacks;
 

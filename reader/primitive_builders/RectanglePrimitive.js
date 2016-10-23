@@ -2,9 +2,11 @@
  * Created by Soner on 21-10-2016.
  */
 
-function RectanglePrimitive(scene, id, x1, x2, y1, y2) {
+function RectanglePrimitive(scene, id, x1, x2, y1, y2)
+{
     this.scene = scene;
     this.id = id;
+
     this.x1 = x1;
     this.x2 = x2;
     this.y1 = y1;

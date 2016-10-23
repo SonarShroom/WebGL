@@ -2,18 +2,19 @@
  * Created by Shadic1910 on 22/10/2016.
  */
 
-function CylinderPrimitive(scene, base, top, height, slices, stacks)
+function CylinderPrimitive(scene, id, base, top, height, slices, stacks)
 {
-
     this.scene = scene;
+    this.id = id;
+
     this.base = base;
     this.top = top;
     this.height = height;
+
     this.slices = slices;
     this.stacks = stacks;
     CGFobject.call(this, scene);
     this.initBuffers();
-
 }
 
 CylinderPrimitive.prototype = Object.call(CGFobject.prototype);

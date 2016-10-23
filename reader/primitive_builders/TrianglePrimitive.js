@@ -2,9 +2,10 @@
  * Created by Soner on 20-10-2016.
  */
 
-function TrianglePrimitive(scene, x1, x2, x3, y1, y2, y3, z1, z2, z3)
+function TrianglePrimitive(scene, id, x1, x2, x3, y1, y2, y3, z1, z2, z3)
 {
     this.scene = scene;
+    this.id = id;
 
     this.x1 = x1;
     this.x2 = x2;

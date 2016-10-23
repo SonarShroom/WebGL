@@ -6,8 +6,10 @@ function TorusPrimitive(scene, id, innerRadius, outerRadius, slices, loops)
 {
     this.scene = scene;
     this.id = id;
+
     this.innerRadius = innerRadius;
     this.outerRadius = outerRadius;
+
     this.slices = slices;
     this.loops = loops;
 
